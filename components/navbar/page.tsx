@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   const handleLogin = () => {
-    window.location.href = "/auth/login";
+    window.location.href = "/login";
   };
 
   return (
@@ -30,7 +30,7 @@ const Navbar = () => {
               <Link href="/dashboard">
                 <Button variant="ghost">Dashboard</Button>
               </Link>
-              <Link href="/cars/add">
+              <Link href="/add-car">
                 <Button variant="ghost">Add Car</Button>
               </Link>
               <Button variant="outline" onClick={handleLogout}>Logout</Button>

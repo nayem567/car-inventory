@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { Car } from "@/types/supabase";
+import DeleteCarButton from "@/components/delete-car-button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -39,6 +40,10 @@ const Dashboard = () => {
     fetchCars();
   }, []);
 
+  const handleCarDeleted = (id: string) => {
+    setCars((prev) => prev.filter((car) => car.id !== id));
+  };
+
   if (loading) return <p className="text-center">Loading...</p>;
 
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -46,7 +51,7 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Car Inventory</h1>
-      <Link href="/cars/add">
+      <Link href="/add-car">
         <Button>Add Car</Button>
       </Link>
       {cars.length === 0 ? (
@@ -68,7 +73,7 @@ const Dashboard = () => {
                     Edit
                   </Button>
                 </Link>
-                <Button variant="destructive">Delete</Button>
+                <DeleteCarButton carId={car.id} onDeleted={handleCarDeleted} />
               </div>
             </li>
           ))}
